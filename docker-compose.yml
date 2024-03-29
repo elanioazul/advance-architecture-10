@@ -3,8 +3,9 @@ services:
   write-db:
     image: postgres
     ports:
-      - "5432:5432"
+      - "5444:5432"
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass123
   read-db:
     image: mongo
