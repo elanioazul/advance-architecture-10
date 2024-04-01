@@ -5,7 +5,8 @@ import { MongoEventStore } from './mongo-event-store';
 import { EventStorePublisher } from './event-store/publishers/event-store.publisher';
 import { Event, EventSchema } from './event-store/schemas/event.schema';
 import { EventSerializer } from './event-store/serializers/event-serializer';
-
+import { EventDeserializer } from './event-store/deserializers/event-deserializer';
+import { EventsBridge } from './event-store/events-bridge';
 @Module({
   imports: [
     MongooseModule.forFeature(
@@ -13,6 +14,12 @@ import { EventSerializer } from './event-store/serializers/event-serializer';
       EVENT_STORE_CONNECTION,
     ),
   ],
-  providers: [EventSerializer, EventStorePublisher, MongoEventStore],
+  providers: [
+    EventSerializer,
+    EventStorePublisher,
+    MongoEventStore,
+    EventsBridge,
+    EventDeserializer,
+  ],
 })
 export class SharedInfrastructureModule {}
