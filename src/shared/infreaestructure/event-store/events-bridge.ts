@@ -34,7 +34,7 @@ export class EventsBridge
         if (change.operationType === 'insert') {
           this.handleEventStoreChange(change);
         }
-      });
+      }) as any;
   }
 
   onApplicationShutdown() {
