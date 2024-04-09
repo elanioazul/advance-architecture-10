@@ -7,6 +7,7 @@ import { Event, EventSchema } from './event-store/schemas/event.schema';
 import { EventSerializer } from './event-store/serializers/event-serializer';
 import { EventDeserializer } from './event-store/deserializers/event-deserializer';
 import { EventsBridge } from './event-store/events-bridge';
+import { EventStore } from '../application/ports/event-store';
 @Module({
   imports: [
     MongooseModule.forFeature(
@@ -20,6 +21,11 @@ import { EventsBridge } from './event-store/events-bridge';
     MongoEventStore,
     EventsBridge,
     EventDeserializer,
+    {
+      provide: EventStore, // 👈
+      useExisting: MongoEventStore, // 👈
+    },
   ],
+  exports: [EventStore],
 })
 export class SharedInfrastructureModule {}
